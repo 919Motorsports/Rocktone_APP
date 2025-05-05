@@ -1,0 +1,160 @@
+
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer base {
+      :root {
+        --background: 0 0% 3.9%; /* Almost Black */
+        --foreground: 0 0% 98%; /* Almost White */
+
+        --card: 0 0% 7%; /* Darker Gray */
+        --card-foreground: 0 0% 90%;
+
+        --popover: 0 0% 3.9%;
+        --popover-foreground: 0 0% 98%;
+
+        --primary: 0 72.2% 50.6%; /* Deep Red */
+        --primary-foreground: 0 85.7% 97.3%;
+
+        --secondary: 0 0% 20%; /* Slate Gray */
+        --secondary-foreground: 0 0% 98%;
+
+        --muted: 0 0% 14.9%;
+        --muted-foreground: 0 0% 63.9%;
+
+        --accent: 0 0% 14.9%;
+        --accent-foreground: 0 0% 98%;
+
+        --destructive: 0 62.8% 30.6%; /* Darker Red */
+        --destructive-foreground: 0 0% 98%;
+
+        --border: 0 0% 25%; /* Darker border */
+        --input: 0 0% 14.9%;
+        --ring: 0 72.2% 50.6%; /* Deep Red for focus rings */
+
+        --radius: 0.5rem;
+      }
+
+      .dark {
+        /* Keeping the same dark theme variables for consistency */
+        --background: 0 0% 3.9%;
+        --foreground: 0 0% 98%;
+
+        --card: 0 0% 7%;
+        --card-foreground: 0 0% 90%;
+
+        --popover: 0 0% 3.9%;
+        --popover-foreground: 0 0% 98%;
+
+        --primary: 0 72.2% 50.6%;
+        --primary-foreground: 0 85.7% 97.3%;
+
+        --secondary: 0 0% 20%;
+        --secondary-foreground: 0 0% 98%;
+
+        --muted: 0 0% 14.9%;
+        --muted-foreground: 0 0% 63.9%;
+
+        --accent: 0 0% 14.9%;
+        --accent-foreground: 0 0% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+
+        --border: 0 0% 25%;
+        --input: 0 0% 14.9%;
+        --ring: 0 72.2% 50.6%;
+      }
+    }
+
+    @layer base {
+      * {
+        @apply border-border;
+      }
+      body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        @apply font-heading text-primary;
+      }
+    }
+
+    .grunge-texture-overlay {
+        position: relative;
+        overflow: hidden; /* Ensure pseudo-element stays within bounds */
+    }
+
+    .grunge-texture-overlay::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: var(--grunge-overlay-url, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E"));
+        opacity: var(--grunge-opacity, 0.7);
+        pointer-events: none; /* Allow interaction with the element below */
+        mix-blend-mode: overlay; /* Experiment with blend modes */
+        z-index: 1; /* Place overlay above content but below interactive elements if needed */
+        animation: grunge-texture 20s linear infinite alternate; /* Subtle movement */
+    }
+
+    /* Apply grunge to specific components */
+    .button-grunge {
+        @apply grunge-texture-overlay;
+        --grunge-opacity: 0.5;
+         --grunge-overlay-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cfilter id='noiseFilterSmall'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilterSmall)' opacity='0.15'/%3E%3C/svg%3E");
+    }
+
+    .card-grunge {
+      @apply grunge-texture-overlay bg-gradient-to-br from-card to-black/80;
+       --grunge-opacity: 0.3;
+    }
+
+    .input-grunge {
+      @apply bg-input border border-border rounded-md px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cfilter id='noiseFilterInput'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilterInput)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+     /* Video Background Styling */
+    .video-background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Place it behind all other content */
+      overflow: hidden;
+    }
+
+    .video-background-container video {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover; /* Cover the entire container */
+    }
+
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+      z-index: -1;
+    }
+
+    /* Ensure content is above the background */
+    #root {
+        position: relative;
+        z-index: 1;
+    }
+
+  
