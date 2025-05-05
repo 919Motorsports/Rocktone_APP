@@ -44,7 +44,7 @@
        {
         id: 6,
         imagePrompt: "Which tattooed frontman co-led Crazy Town to fame with the hit single 'Butterfly' and later collaborated with Paul Oakenfold on 'Starry Eyed Surprise?",
-        options: ["Jacoby Shaddix", "Shifty Shellshock", "Brandon Boyd", "Fred Durstllapalooza", "Coachella", "Woodstock", "Glastonbury"],
+        options: ["Jacoby Shaddix", "Shifty Shellshock", "Brandon Boyd"],
         correctAnswer: "Shifty Shellshock",
         imageUrl: "https://res.cloudinary.com/dqtilqeky/image/upload/v1746387156/nown_zutkzj.png", // Placeholder
         isBonus: false,
